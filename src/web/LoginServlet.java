@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 /**
@@ -24,28 +25,46 @@ public class LoginServlet extends HttpServlet {
         //2.获取请求参数
         String username = req.getParameter("username");
         String password = req.getParameter("password");
+        String loginRandomText = req.getParameter("verifycode");
 
-        //3.封装user对象
-        User loginUser = new User();
-        loginUser.setUsername(username);
-        loginUser.setPassword(password);
+        //判断验证码
+        //1.获取session
+        HttpSession session = req.getSession();
+        //2.获取数据
+        Object randomText = session.getAttribute("randomText");
+        //删除验证码
+        session.removeAttribute("randomText");
 
-        //4.调用login方法在数据库中查询
-        UserDao dao = new UserDao();
-        User user = dao.login(loginUser);
-        System.out.println(user);
+        if (loginRandomText.toUpperCase().equals(randomText.toString().toUpperCase())){
+            //3.封装user对象
+            User loginUser = new User();
+            loginUser.setUsername(username);
+            loginUser.setPassword(password);
 
-        //5.判断user
-        if (user == null){
-            //登录失败
-            req.getRequestDispatcher("/failServlet").forward(req,resp);
+            //4.调用login方法在数据库中查询
+            UserDao dao = new UserDao();
+            User user = dao.login(loginUser);
+            System.out.println(user);
+
+            //5.判断user
+            if (loginUser == null){
+                //2代表用户名或密码错误
+                req.setAttribute("userError", "用户名或密码错误");
+                //登录失败
+                req.getRequestDispatcher("/index.jsp").forward(req,resp);
+            }else {
+                //登录成功
+                //存储数据
+                req.setAttribute("user",loginUser);
+                //转发
+                req.getRequestDispatcher("/successServlet").forward(req,resp);
+            }
         }else {
-            //登录成功
-            //存储数据
-            req.setAttribute("user",user);
-            //转发
-            req.getRequestDispatcher("/successServlet").forward(req,resp);
+            //设置错误原因，1代表验证码错误
+            req.setAttribute("verifyError", "验证码错误");
+            req.getRequestDispatcher("/index.jsp").forward(req,resp);
         }
+
     }
 
     @Override

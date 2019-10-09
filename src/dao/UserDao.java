@@ -6,21 +6,27 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import util.JDBCUtil;
 
+import javax.sql.DataSource;
+
 /**
  * @outhor li
  * @create 2019-10-06 0:27
  * 操作数据库user表
  */
 public class UserDao {
-    //申明JDBCTemplate对象
-    private JdbcTemplate template = new JdbcTemplate(JDBCUtil.getDataSource());
 
     /**
      * 登录过程操作数据库方法
      * @param loginUser user对象，用户输入页面返回的对象
      * @return user  user对象，查询的结果对象，没查询到则返回null
      */
-    public User login(User loginUser){
+    public User login(User loginUser) {
+
+        JDBCUtil jdbcUtil = new JDBCUtil();
+        DataSource dataSource = jdbcUtil.getDataSource();
+        //申明JDBCTemplate对象
+        JdbcTemplate template = new JdbcTemplate(dataSource);
+
         try{
             //1.sql 语句
             String sql = "select * from users where username = ? and password = ?";
@@ -34,5 +40,7 @@ public class UserDao {
         }
 
     }
-
+//
 }
+
+

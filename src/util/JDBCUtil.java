@@ -19,7 +19,6 @@ public class JDBCUtil {
      * 创建一个连接池对象
      */
     private static DataSource dataSource;
-
     /**
      * 加载驱动并初始化连接池对象
      */
@@ -50,5 +49,4 @@ public class JDBCUtil {
     public static Connection getConnection() throws SQLException {
         return dataSource.getConnection();
     }
-
 }
