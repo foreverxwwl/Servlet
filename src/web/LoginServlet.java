@@ -48,7 +48,7 @@ public class LoginServlet extends HttpServlet {
 
             //5.判断user
             if (loginUser == null){
-                //2代表用户名或密码错误
+                //设置错误原因
                 req.setAttribute("userError", "用户名或密码错误");
                 //登录失败
                 req.getRequestDispatcher("/index.jsp").forward(req,resp);
@@ -60,7 +60,7 @@ public class LoginServlet extends HttpServlet {
                 req.getRequestDispatcher("/successServlet").forward(req,resp);
             }
         }else {
-            //设置错误原因，1代表验证码错误
+            //设置错误原因
             req.setAttribute("verifyError", "验证码错误");
             req.getRequestDispatcher("/index.jsp").forward(req,resp);
         }

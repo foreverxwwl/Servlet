@@ -3,6 +3,7 @@ package util;
 import com.alibaba.druid.pool.DruidDataSourceFactory;
 
 import javax.sql.DataSource;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Connection;
@@ -25,7 +26,9 @@ public class JDBCUtil {
     static {
         try {
             //1.使用ClassLoader加载配置文件，获取字节流输入
-            InputStream is = JDBCUtil.class.getClassLoader().getResourceAsStream("druid.properties");
+//            InputStream is = JDBCUtil.class.getResourceAsStream("/druid.properties");
+            InputStream is = new  FileInputStream(JDBCUtil.class.getResource("/").getPath() + "/druid.properties");
+//          FileInputStream res = new FileInputStream("druid.properties");
             //2.加载配置文件
             Properties properties = new Properties();
             properties.load(is);

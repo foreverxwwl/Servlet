@@ -35,10 +35,9 @@
     <a id="change" href="">看不清换一张？</a><br>
 
     <input type="submit" value="登录">
-
   </form>
 
-  <div><%=request.getAttribute("userError") == null ? "":request.getAttribute("userError")%></div>
-  <div><%=request.getAttribute("verifyError")== null ? "":request.getAttribute("verifyError")%%></div>
+<%--  <div><%=request.getAttribute("userError") == null ? "":request.getAttribute("userError")%></div>--%>
+<%--  <div><%=request.getAttribute("verifyError")== null ? "":request.getAttribute("verifyError")%%></div>--%>
   </body>
 </html>
