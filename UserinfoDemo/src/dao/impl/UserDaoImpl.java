@@ -16,6 +16,11 @@ import java.util.List;
  */
 public class UserDaoImpl implements UserDao {
     private JdbcTemplate template = new JdbcTemplate(JDBCUtils.getDataSource());
+
+    /**
+     * 查询所有
+     * @return List<User>
+     */
     @Override
     public List<User> findAll(){
         String sql = "select * from user";
@@ -25,7 +30,7 @@ public class UserDaoImpl implements UserDao {
     }
 
     /**
-     * 添加用户过程操作数据库方法
+     * 添加用户
      * @param addUser user对象，用户输入页面返回的对象
      * @return void
      */
@@ -42,5 +47,25 @@ public class UserDaoImpl implements UserDao {
             e.printStackTrace();
         }
 
+    }
+
+    /**
+     * 用户登录
+     * @param loginUser
+     * @return User
+     */
+    @Override
+    public User login(User loginUser) {
+        try{
+            //1.sql 语句
+            String sql = "select * from user where username = ? and password = ?";
+            //2.调用query方法
+            //通过query方法查询数据库，通过BeanPropertyRowMapper实现类完成数据到JavaBean的自动封装，将查询结果封装到一个User对象中并返回
+            User user = template.queryForObject(sql, new BeanPropertyRowMapper<User>(User.class), loginUser.getUsername(), loginUser.getPassword());
+            return user;
+        } catch (DataAccessException e){
+            e.printStackTrace();
+            return null;
+        }
     }
 }

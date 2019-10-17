@@ -15,5 +15,18 @@ public interface UserService {
      * 查询所有用户信息
      */
     public List<User> findAll();
+
+    /**
+     * 添加用户信息
+     * @param addUser
+     * @throws SQLException
+     */
     public void addUsers(User addUser) throws SQLException;
+
+    /**
+     * 登录查询
+     * @param loginUser
+     * @return User
+     */
+    public User login(User loginUser);
 }
