@@ -68,4 +68,16 @@ public class UserDaoImpl implements UserDao {
             return null;
         }
     }
+
+    /**
+     * 点击删除
+     * @param id
+     */
+    @Override
+    public void delUser(String id){
+        //1.定义SQL语句
+        String sql = "delete from user where id = ?";
+        //2.执行sql
+        template.update(sql, id);
+    }
 }

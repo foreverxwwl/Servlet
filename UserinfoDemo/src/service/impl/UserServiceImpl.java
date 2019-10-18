@@ -43,4 +43,13 @@ public class UserServiceImpl implements UserService {
     public User login(User loginUser) {
         return dao.login(loginUser);
     }
+
+    /**
+     * 点击删除
+     * @param id
+     */
+    @Override
+    public void delUser(String id) {
+        dao.delUser(id);
+    }
 }

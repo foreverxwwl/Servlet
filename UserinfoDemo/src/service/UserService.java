@@ -29,4 +29,10 @@ public interface UserService {
      * @return User
      */
     public User login(User loginUser);
+
+    /**
+     * 点击删除
+     * @param id
+     */
+    public void delUser(String id);
 }
