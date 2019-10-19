@@ -29,10 +29,35 @@
     </style>
     <script>
         function deleteUser(id){
+            console.log("fsafa");
             //用户安全提示
             if(confirm("您确定要删除吗？")){
                 //访问路径
                 location.href="${pageContext.request.contextPath}/delUserServlet?id="+id;
+            }
+        }
+        window.onload = function(){
+            //给删除选中按钮添加单击事件
+            document.getElementById("delSelected").onclick = function(ev) {
+                if (confirm("您确定要删除选中条目吗？")) {
+
+                    var flag = false;
+                    //判断是否有选中条目
+                    var cbs = document.getElementsByName("uid");
+                    for (var i = 0; i < cbs.length; i++) {
+                        if (cbs[i].checked) {
+                            //有一个条目选中了
+                            flag = true;
+                            break;
+                        }
+                    }
+
+                    if (flag) {//有条目被选中
+                        //表单提交
+                        document.getElementById("form").submit();
+                    }
+
+                }
             }
         }
     </script>
@@ -71,7 +96,7 @@
     <form id="form" action="${pageContext.request.contextPath}/delSelectedServlet" method="post">
     <table border="1" class="table table-bordered table-hover">
         <tr class="success">
-            <td><input type="checkbox" id="firstCb"></td>
+            <td></td>
             <th>编号</th>
             <th>姓名</th>
             <th>性别</th>
@@ -92,11 +117,10 @@
                 <td>${user.address}</td>
                 <td>${user.qq}</td>
                 <td>${user.email}</td>
-                <td><a class="btn btn-default btn-sm" href="${pageContext.request.contextPath}/findUserServlet?id=${user.id}">修改</a>&nbsp;
+                <td><a class="btn btn-default btn-sm" href="${pageContext.request.contextPath}/findUserByIdServlet?id=${user.id}">修改</a>&nbsp;
                     <a class="btn btn-default btn-sm" href="javascript:deleteUser(${user.id});">删除</a></td>
             </tr>
         </c:forEach>
-
 
     </table>
     </form>

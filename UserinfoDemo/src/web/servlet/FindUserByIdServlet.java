@@ -16,30 +16,22 @@ import java.util.Map;
 
 /**
  * @outhor li
- * @create 2019-10-18 17:55
- * 修改用户信息
+ * @create 2019-10-19 14:53
+ * 根据id查找
  */
-@WebServlet("/updateUserServlet")
-public class UpdateUserServlet extends HttpServlet {
+@WebServlet("/findUserByIdServlet")
+public class FindUserByIdServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setCharacterEncoding("utf-8");
-        //1.获取页面参数
-        Map<String, String[]> parameterMap = request.getParameterMap();
-        //封装updateUser对象
-        User updateUser = new User();
-        try {
-            BeanUtils.populate(updateUser,parameterMap);
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (InvocationTargetException e) {
-            e.printStackTrace();
-        }
-        //2.调用UserService方法
+        //1.获取页面元素
+        String id = request.getParameter("id");
+        //通过id查找值user
+        User user = new User();
         UserService userService = new UserServiceImpl();
-        userService.updateUsers(updateUser);
-        //3.返回UserListServlet页面
-        response.sendRedirect(request.getContextPath()+"/userListServlet");
-
+        user = userService.findUserById(id);
+        //将user存入request
+        request.setAttribute("user", user);
+        //转发到update.jsp
+        request.getRequestDispatcher("/update.jsp").forward(request,response);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

@@ -49,6 +49,16 @@
                 <option value="陕西">陕西</option>
                 <option value="北京">北京</option>
                 <option value="上海">上海</option>
+                <option value="北京">北京</option>
+                <option value="天津">天津</option>
+                <option value="重庆">重庆</option>
+                <option value="河北">河北</option>
+                <option value="山西">山西</option>
+                <option value="辽宁">辽宁</option>
+                <option value="吉林">吉林</option>
+                <option value="黑龙江">黑龙江</option>
+                <option value="江苏">江苏</option>
+                <option value="山西">山西</option>
             </select>
         </div>
 

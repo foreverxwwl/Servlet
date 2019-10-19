@@ -52,4 +52,19 @@ public class UserServiceImpl implements UserService {
     public void delUser(String id) {
         dao.delUser(id);
     }
+
+    /**
+     * 点击修改
+     * @param updateUser
+     */
+    @Override
+    public void updateUsers(User updateUser) {
+        dao.updateUsers(updateUser);
+    }
+
+    @Override
+    public User findUserById(String id) {
+        UserDao userDao = new UserDaoImpl();
+        return userDao.findUserById(Integer.parseInt(id));
+    }
 }

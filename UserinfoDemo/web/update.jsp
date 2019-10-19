@@ -67,6 +67,20 @@
                     <option value="北京">北京</option>
                     <option value="上海" selected>上海</option>
                 </c:if>
+                <c:if test="${user.address == '山西'}">
+                    <option value="陕西" >陕西</option>
+                    <option value="北京">北京</option>
+                    <option value="上海">上海</option>
+                    <option value="江苏">江苏</option>
+                    <option value="山西" selected>山西</option>
+                </c:if>
+                <c:if test="${user.address == '江苏'}">
+                    <option value="陕西" >陕西</option>
+                    <option value="北京">北京</option>
+                    <option value="江苏" selected>江苏</option>
+                    <option value="山西" >山西</option>
+                    <option value="上海">上海</option>
+                </c:if>
             </select>
         </div>
 

@@ -36,4 +36,17 @@ public interface UserDao {
      * @param id
      */
     public void delUser(String id);
+
+    /**
+     * 点击修改
+     * @param updateUser
+     */
+    void updateUsers(User updateUser);
+
+    /**
+     * 通过id查找
+     * @param id
+     * @return
+     */
+    User findUserById(int id);
 }
