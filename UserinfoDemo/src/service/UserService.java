@@ -1,9 +1,11 @@
 package service;
 
+import domain.Page;
 import domain.User;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @outhor li
@@ -48,4 +50,19 @@ public interface UserService {
      * @return User
      */
     User findUserById(String id);
+
+    /**
+     * 删除选中
+     * @param ids
+     */
+    void delSelectUser(String[] ids);
+
+    /**
+     * 分页查询
+     * @param currentPage
+     * @param rows
+     * @param condition
+     * @return
+     */
+    Page<User> findUserByPage(String currentPage, String rows, Map<String, String[]> condition);
 }

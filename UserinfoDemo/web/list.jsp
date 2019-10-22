@@ -59,6 +59,15 @@
 
                 }
             }
+            //获取第一个框的属性，添加点击响应
+            document.getElementById("firstId").onclick = function (ev) {
+                //获取所有id
+                var ids = document.getElementsByName("uid");
+                //遍历，让其等于第一个id
+                for (var i = 0; i < ids.length; i++) {
+                    ids[i].checked = this.checked;
+                }
+            }
         }
     </script>
 </head>
@@ -96,7 +105,7 @@
     <form id="form" action="${pageContext.request.contextPath}/delSelectedServlet" method="post">
     <table border="1" class="table table-bordered table-hover">
         <tr class="success">
-            <td></td>
+            <td><input type="checkbox" id="firstId"></td>
             <th>编号</th>
             <th>姓名</th>
             <th>性别</th>
@@ -107,7 +116,7 @@
             <th>操作</th>
         </tr>
 
-        <c:forEach items="${users}" var="user" varStatus="s">
+        <c:forEach items="${page.totalList}" var="user" varStatus="s">
             <tr>
                 <td><input type="checkbox" name="uid" value="${user.id}"></td>
                 <td>${s.count}</td>
@@ -122,8 +131,56 @@
             </tr>
         </c:forEach>
 
+
     </table>
     </form>
+    <div>
+        <nav aria-label="Page navigation">
+            <ul class="pagination">
+                <c:if test="${page.currentPage == 1}">
+
+                <li class="disabled" >
+                    </c:if>
+
+                    <c:if test="${page.currentPage != 1}">
+                <li>
+                    </c:if>
+
+
+                    <a href="${pageContext.request.contextPath}/findUserByPageServlet?currentPage=${page.currentPage - 1}&rows=5&name=${condition.name[0]}&address=${condition.address[0]}&email=${condition.email[0]}" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+
+
+                <c:forEach begin="1" end="${page.totalPage}" var="i" >
+
+
+                    <c:if test="${page.currentPage == i}">
+                        <li class="active"><a href="${pageContext.request.contextPath}/findUserByPageServlet?currentPage=${i}&rows=5&name=${condition.name[0]}&address=${condition.address[0]}&email=${condition.email[0]}">${i}</a></li>
+                    </c:if>
+                    <c:if test="${page.currentPage != i}">
+                        <li><a href="${pageContext.request.contextPath}/findUserByPageServlet?currentPage=${i}&rows=5&name=${condition.name[0]}&address=${condition.address[0]}&email=${condition.email[0]}">${i}</a></li>
+                    </c:if>
+
+                </c:forEach>
+
+
+                <li>
+                    <a href="${pageContext.request.contextPath}/findUserByPageServlet?currentPage=${page.currentPage + 1}&rows=5&name=${condition.name[0]}&address=${condition.address[0]}&email=${condition.email[0]}" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+                <span style="font-size: 25px;margin-left: 5px;">
+                    共${page.totalCount}条记录，共${page.totalPage}页
+                </span>
+
+            </ul>
+        </nav>
+
+
+    </div>
+
 </div>
 </body>
 </html>

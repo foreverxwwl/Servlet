@@ -44,7 +44,7 @@ public class AddUserServlet extends HttpServlet {
             e.printStackTrace();
         }
         //5.跳转列表页面
-        response.sendRedirect(request.getContextPath()+"/userListServlet");
+        response.sendRedirect(request.getContextPath()+"/findUserByPageServlet");
 
     }
 

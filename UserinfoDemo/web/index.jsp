@@ -21,7 +21,7 @@
 <div align="center">
   <div style="text-decoration:none;font-size:43px">${user.username},欢迎您</div>
   <a
-          href="/UserinfoDemo/userListServlet" style="text-decoration:none;font-size:33px">查询所有用户信息
+          href="${pageContext.request.contextPath}/findUserByPageServlet" style="text-decoration:none;font-size:33px">查询所有用户信息
   </a>
 </div>
 </body>

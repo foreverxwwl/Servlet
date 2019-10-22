@@ -4,6 +4,7 @@ import domain.User;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @outhor li
@@ -49,4 +50,20 @@ public interface UserDao {
      * @return
      */
     User findUserById(int id);
+
+    /**
+     * 分页查询
+     * @param start
+     * @param rows
+     * @param condition
+     * @return List<User>
+     */
+    List<User> findUserByPage(int start, int rows, Map<String, String[]> condition);
+
+    /**
+     * 查询记录数
+     * @param condition
+     * @return int
+     */
+    int findTotalCount(Map<String, String[]> condition);
 }

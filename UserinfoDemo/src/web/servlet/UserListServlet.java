@@ -29,6 +29,7 @@ public class UserListServlet extends HttpServlet {
         request.setAttribute("users", users);
         //3.转发到list.jsp页面展示
         request.getRequestDispatcher("/list.jsp").forward(request,response);
+        response.sendRedirect(request.getContextPath()+"/findUserByPageServlet");
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
