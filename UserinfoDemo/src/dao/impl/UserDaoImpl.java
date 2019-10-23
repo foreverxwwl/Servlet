@@ -144,9 +144,6 @@ public class UserDaoImpl implements UserDao {
         params.add(start);
         params.add(rows);
         sql = sb.toString();
-        System.out.println(sql);
-        System.out.println(params);
-
         return template.query(sql,new BeanPropertyRowMapper<User>(User.class),params.toArray());
 
     }
