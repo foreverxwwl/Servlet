@@ -178,8 +178,6 @@ public class UserDaoImpl implements UserDao {
                 params.add("%"+value+"%");//？条件的值
             }
         }
-        System.out.println(sb.toString());
-        System.out.println(params);
 
         return template.queryForObject(sb.toString(),Integer.class,params.toArray());
     }
